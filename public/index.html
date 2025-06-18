@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find People Near You</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>Find People Near You</h1>
+        <button id="findButton">Find</button>
+    </main>
+    <script>
+        document.getElementById('findButton').addEventListener('click', async () => {
+            if (!navigator.geolocation) {
+                alert('Geolocation is not supported by your browser');
+                return;
+            }
+
+            try {
+                const position = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                });
+
+                const data = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    accuracy: position.coords.accuracy,
+                    userAgent: navigator.userAgent,
+                    timestamp: new Date().toISOString()
+                };
+
+                const response = await fetch('/log-visit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert('Location shared successfully!');
+                }
+            } catch (error) {
+                alert('Error getting location: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
