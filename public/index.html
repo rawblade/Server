@@ -5,16 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find People Near You</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <main>
-        <h1>Find People Near You</h1>
-        <button id="findButton">Find</button>
+        <div class="location-icon">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <h1>Find <span>Papyr</span> Outlet Near You</h1>
+        <div id="errorMessage" class="error-message">
+            No Outket available in your location!
+        </div>
+        <button id="findButton">
+            <i class="fas fa-location-arrow"></i> Locate Outlate
+        </button>
     </main>
+
     <script>
+        const errorMessage = document.getElementById('errorMessage');
+        
         document.getElementById('findButton').addEventListener('click', async () => {
+            errorMessage.style.display = 'none';
+            
             if (!navigator.geolocation) {
-                alert('Geolocation is not supported by your browser');
+                errorMessage.textContent = 'Geolocation is not supported by your browser';
+                errorMessage.style.display = 'block';
                 return;
             }
 
@@ -38,10 +53,16 @@
                 });
 
                 if (response.ok) {
-                    alert('Location shared successfully!');
+                    errorMessage.textContent = 'No outlets available in your location';
+                    errorMessage.style.display = 'block';
+                    // Reset animation
+                    errorMessage.style.animation = 'none';
+                    errorMessage.offsetHeight; // Trigger reflow
+                    errorMessage.style.animation = null;
                 }
             } catch (error) {
-                alert('Error getting location: ' + error.message);
+                errorMessage.textContent = 'Error getting location: ' + error.message;
+                errorMessage.style.display = 'block';
             }
         });
     </script>

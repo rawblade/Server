@@ -5,42 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../public/style.css">
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #444;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #333;
-        }
-        .container {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-    </style>
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
     <div class="container">
-        <h1>Location Logs</h1>
-        <table id="logsTable">
-            <thead>
-                <tr>
-                    <th>Timestamp</th>
-                    <th>IP Address</th>
-                    <th>Device Info</th>
-                    <th>Location</th>
-                    <th>Accuracy</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div class="dashboard-header">
+            <h1>Location Logs</h1>
+            <p class="subtitle">Admin Dashboard</p>
+        </div>
+        <div class="table-container">
+            <table id="logsTable">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>IP Address</th>
+                        <th>Device Info</th>
+                        <th>Location</th>
+                        <th>Accuracy</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
     <script src="admin.js"></script>
 </body>

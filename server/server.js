@@ -39,7 +39,7 @@ app.post('/log-visit', async (req, res) => {
 
         logs.push(visitorData);
         await fs.writeFile(dataFile, JSON.stringify(logs, null, 2));
-        res.status(200).json({ message: 'Location logged successfully' });
+        res.status(200).json({ message: 'Not Available For ur Location Yet' });
     } catch (error) {
         res.status(500).json({ error: 'Error logging location' });
     }
